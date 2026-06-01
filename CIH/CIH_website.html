@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#FAFAF7;color:#1A1A1A;overflow-x:hidden}
+:root{--red:#C84B31;--dark:#1A1A1A;--green:#1A6B4A;--warm:#F7F5F0}
+
+/* ── NAV ── */
+#navbar{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);border-bottom:1px solid rgba(0,0,0,0.08);backdrop-filter:blur(12px);transition:box-shadow .3s}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-box{width:36px;height:36px;background:var(--red);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:white;flex-shrink:0}
+.logo-name{font-size:13px;font-weight:600;color:#1A1A1A;line-height:1.2}
+.logo-sub{font-size:9px;color:#999;letter-spacing:.1em;text-transform:uppercase}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-link{font-size:13px;color:#444;cursor:pointer;transition:color .2s;font-weight:400;padding:4px 0;border-bottom:2px solid transparent;transition:all .2s}
+.nav-link:hover{color:var(--red)}
+.nav-link.active{color:var(--red);font-weight:600;border-bottom-color:var(--red)}
+.btn-apply{background:var(--red);color:white;border:none;padding:10px 22px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-apply:hover{background:#a83828;transform:translateY(-1px)}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeIn .4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HOME HERO ── */
+.hero{min-height:88vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-img{position:absolute;inset:0;background-image:url('https://www.kenyautalii.ac.ke/wp-content/uploads/2024/02/hospitality-courses-1.jpg');background-size:cover;background-position:center top;filter:brightness(0.35)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,26,26,.92) 0%,rgba(44,24,16,.78) 55%,rgba(61,26,10,.65) 100%)}
+.hero-glow{position:absolute;top:0;right:0;width:50%;height:100%;background:radial-gradient(ellipse at 75% 40%,rgba(200,75,49,.22) 0%,transparent 65%)}
+.hero-ring1{position:absolute;top:-80px;right:-60px;width:440px;height:440px;border:1px solid rgba(200,75,49,.13);border-radius:50%}
+.hero-ring2{position:absolute;top:60px;right:70px;width:260px;height:260px;border:1px solid rgba(200,75,49,.07);border-radius:50%}
+.hero-content{max-width:1140px;margin:0 auto;padding:80px 24px;position:relative;z-index:2;width:100%}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,75,49,.15);border:1px solid rgba(200,75,49,.3);padding:6px 16px;margin-bottom:28px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.badge-txt{font-size:10px;color:#E8907A;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6.5vw,72px);font-weight:700;color:white;line-height:1.08;max-width:700px;margin-bottom:24px;letter-spacing:-.02em}
+.hero h1 em{color:#E8907A;font-style:italic}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.62);max-width:490px;line-height:1.78;margin-bottom:40px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+.btn-hero-primary{background:var(--red);color:white;border:none;padding:15px 34px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-hero-primary:hover{background:#a83828;transform:translateY(-1px)}
+.btn-hero-ghost{background:transparent;color:rgba(255,255,255,.85);border:1.5px solid rgba(255,255,255,.32);padding:14px 32px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,.7)}
+.hero-stats{display:flex;gap:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
+.stat-v{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#E8907A;line-height:1}
+.stat-l{font-size:10px;color:rgba(255,255,255,.45);margin-top:5px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ── ACCRED STRIP ── */
+.strip{background:var(--green);padding:18px 24px}
+.strip-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.strip-lbl{font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-right:6px}
+.strip-item{font-size:12px;color:rgba(255,255,255,.88);font-weight:500}
+.strip-dot{color:rgba(255,255,255,.2);font-size:16px}
+
+/* ── HOME FEATURES ROW ── */
+.features-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.feat-card{position:relative;overflow:hidden;min-height:320px;display:flex;align-items:flex-end;cursor:pointer}
+.feat-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.feat-card:hover img{transform:scale(1.06)}
+.feat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 60%)}
+.feat-body{position:relative;z-index:1;padding:28px 24px;color:white}
+.feat-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px}
+.feat-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1.2}
+
+/* ── ABOUT PAGE ── */
+.page-hero{min-height:42vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.page-hero-img{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.32)}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,26,26,.9),rgba(61,26,10,.6))}
+.page-hero-content{max-width:1140px;margin:0 auto;padding:70px 24px;position:relative;z-index:2;width:100%}
+.page-hero-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E8907A;font-weight:600;margin-bottom:14px}
+.page-hero h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,58px);font-weight:700;color:white;line-height:1.1;letter-spacing:-.02em}
+
+/* ── ABOUT BODY ── */
+.about-body{max-width:1140px;margin:0 auto;padding:80px 24px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-bottom:80px}
+.section-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:16px}
+.section-h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;line-height:1.15;margin-bottom:20px;letter-spacing:-.02em}
+.body-p{font-size:15px;color:#555;line-height:1.8;margin-bottom:16px}
+.feat-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.feat-item{display:flex;align-items:center;gap:10px;font-size:13px;color:#333}
+.feat-chk{width:20px;height:20px;border-radius:50%;background:rgba(200,75,49,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--red);font-size:11px}
+.about-photo{width:100%;aspect-ratio:4/5;object-fit:cover}
+.about-photo-wrap{position:relative}
+.about-stat-badge{position:absolute;bottom:-20px;left:-20px;background:var(--red);padding:20px 24px;color:white;z-index:2}
+.about-stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;line-height:1}
+.about-stat-lbl{font-size:10px;opacity:.85;text-transform:uppercase;letter-spacing:.07em;margin-top:4px;line-height:1.4}
+
+/* ── STATS BAR ── */
+.stats-bar{background:var(--dark);padding:60px 24px}
+.stats-bar-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06)}
+.stat-block{background:#1a1a1a;padding:40px 32px;text-align:center}
+.stat-block-v{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#E8907A;line-height:1}
+.stat-block-l{font-size:11px;color:rgba(255,255,255,.45);margin-top:8px;letter-spacing:.07em;text-transform:uppercase}
+
+/* ── COURSES PAGE ── */
+.courses-wrap{max-width:1140px;margin:0 auto;padding:80px 24px}
+.courses-intro{text-align:center;margin-bottom:56px}
+.courses-intro h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.courses-intro p{font-size:15px;color:#666;max-width:520px;margin:16px auto 0;line-height:1.75}
+.dept-tabs{display:flex;gap:0;border-bottom:2px solid rgba(0,0,0,.07);margin-bottom:48px;flex-wrap:wrap}
+.dept-tab{padding:14px 22px;font-size:13px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;color:#666;transition:all .2s;display:flex;align-items:center;gap:8px}
+.dept-tab:hover{color:var(--dark)}
+.dept-tab.active{color:var(--red);font-weight:600;border-bottom-color:var(--red)}
+.courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.course-card{background:white;border:1px solid rgba(0,0,0,.07);overflow:hidden;transition:box-shadow .2s;cursor:pointer}
+.course-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.course-card-img{height:180px;object-fit:cover;width:100%;display:block}
+.course-card-body{padding:22px}
+.course-card-tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:8px}
+.course-card-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.3}
+.course-card-desc{font-size:13px;color:#666;line-height:1.7}
+
+/* ── ADMISSIONS PAGE ── */
+.admissions-wrap{max-width:1140px;margin:0 auto;padding:80px 24px}
+.admissions-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:72px;align-items:start}
+.steps-list{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid rgba(0,0,0,.07)}
+.step:last-child{border:none}
+.step-num{width:40px;height:40px;background:var(--red);color:white;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-size:15px;font-weight:600;margin-bottom:6px;color:#1A1A1A}
+.step-desc{font-size:13px;color:#666;line-height:1.7}
+.form-card{background:white;border:1px solid rgba(0,0,0,.07);padding:36px}
+.form-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1px solid #ddd;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;background:white;color:#1A1A1A}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-submit{width:100%;background:var(--red);color:white;border:none;padding:16px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:8px}
+.btn-submit:hover{background:#a83828}
+
+/* ── CONTACT PAGE ── */
+.contact-wrap{max-width:1140px;margin:0 auto;padding:80px 24px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:24px;margin-top:28px}
+.contact-item{display:flex;align-items:flex-start;gap:14px}
+.contact-icon{width:44px;height:44px;background:rgba(200,75,49,.1);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-item-title{font-size:12px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.contact-item-val{font-size:14px;color:#333;line-height:1.55}
+.map-placeholder{background:linear-gradient(135deg,#1A6B4A,#0F4A32);height:300px;display:flex;align-items:center;justify-content:center;margin-top:32px;position:relative;overflow:hidden}
+.map-text{text-align:center;color:white}
+.map-text-icon{font-size:48px;margin-bottom:12px}
+.map-text-title{font-size:16px;font-weight:600}
+.map-text-sub{font-size:13px;opacity:.7;margin-top:4px}
+.wa-btn{display:flex;align-items:center;gap:12px;background:#25D366;color:white;border:none;padding:14px 28px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;margin-top:28px;width:100%;justify-content:center}
+.wa-btn:hover{background:#1eba58}
+
+/* ── EVENTS PAGE ── */
+.events-wrap{max-width:1140px;margin:0 auto;padding:80px 24px}
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.event-card{background:white;border:1px solid rgba(0,0,0,.07);overflow:hidden}
+.event-card-img{height:200px;object-fit:cover;width:100%;display:block}
+.event-card-body{padding:22px}
+.event-date{font-size:11px;color:var(--red);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.event-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3}
+.event-desc{font-size:13px;color:#666;line-height:1.65}
+
+/* ── WHY SECTION ── */
+.why-section{background:#1A1A1A;padding:80px 24px}
+.why-inner{max-width:1140px;margin:0 auto}
+.why-header{text-align:center;margin-bottom:52px}
+.why-header .section-label{color:#E8907A}
+.why-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:700;color:white;letter-spacing:-.02em}
+.why-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.05)}
+.why-card{background:#222;padding:26px 20px}
+.why-icon{font-size:26px;margin-bottom:12px}
+.why-title{font-size:13px;font-weight:600;color:white;margin-bottom:6px}
+.why-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.65}
+
+/* ── CTA STRIP ── */
+.cta-section{background:var(--red);padding:80px 24px;text-align:center}
+.cta-inner{max-width:820px;margin:0 auto}
+.cta-inner h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,56px);font-weight:700;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-.02em}
+.cta-inner p{font-size:16px;color:rgba(255,255,255,.8);max-width:460px;margin:0 auto 38px;line-height:1.75}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:white;color:var(--red);border:none;padding:15px 38px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.btn-outline-w{background:transparent;color:white;border:2px solid rgba(255,255,255,.45);padding:14px 36px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-outline-w:hover{border-color:rgba(255,255,255,.8)}
+.cta-contacts{display:flex;gap:36px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+.cta-contact{font-size:13px;color:rgba(255,255,255,.82)}
+
+/* ── FOOTER ── */
+footer{background:#111;padding:56px 24px 28px}
+.footer-inner{max-width:1140px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.footer-logo-box{width:34px;height:34px;background:var(--red);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:white}
+.footer-logo-text{font-size:13px;font-weight:600;color:white}
+.footer-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.8;max-width:260px}
+.footer-col-title{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:18px;font-weight:600}
+.footer-link{display:block;font-size:12px;color:rgba(255,255,255,.58);margin-bottom:10px;cursor:pointer;transition:color .2s}
+.footer-link:hover{color:white}
+.footer-bar{border-top:1px solid rgba(255,255,255,.06);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bar span{font-size:11px;color:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div id="navbar">
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-box">CIH</div>
+      <div>
+        <div class="logo-name">Cascade Institute</div>
+        <div class="logo-sub">of Hospitality</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <span class="nav-link active" id="nav-home" onclick="showPage('home')">Home</span>
+      <span class="nav-link" id="nav-about" onclick="showPage('about')">About</span>
+      <span class="nav-link" id="nav-courses" onclick="showPage('courses')">Courses</span>
+      <span class="nav-link" id="nav-admissions" onclick="showPage('admissions')">Admissions</span>
+      <span class="nav-link" id="nav-events" onclick="showPage('events')">Events</span>
+      <span class="nav-link" id="nav-contact" onclick="showPage('contact')">Contact</span>
+      <button class="btn-apply" onclick="showPage('admissions')">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ HOME PAGE ════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-ring1"></div>
+    <div class="hero-ring2"></div>
+    <div class="hero-content">
+      <div class="badge"><div class="badge-dot"></div><span class="badge-txt">CTH Gold Centre · Thika, Kenya</span></div>
+      <h1>The Gateway to<br><em>Global Hospitality</em><br>Opportunities</h1>
+      <p class="hero-sub">Over a decade of shaping Kenya's finest hospitality professionals. World-class training. Internationally recognized qualifications. Your career starts here.</p>
+      <div class="hero-btns">
+        <button class="btn-hero-primary" onclick="showPage('courses')">Explore Programmes</button>
+        <button class="btn-hero-ghost" onclick="showPage('about')">Our Story</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-v">10+</div><div class="stat-l">Years of Excellence</div></div>
+        <div><div class="stat-v">56+</div><div class="stat-l">Programmes Offered</div></div>
+        <div><div class="stat-v">3</div><div class="stat-l">Campuses in Kenya</div></div>
+        <div><div class="stat-v">Gold</div><div class="stat-l">CTH Centre Status</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="strip-lbl">Accredited by:</span>
+      <span class="strip-item">CTH – Confederation of Tourism & Hospitality</span>
+      <span class="strip-dot">·</span>
+      <span class="strip-item">KNEC</span>
+      <span class="strip-dot">·</span>
+      <span class="strip-item">ICM</span>
+      <span class="strip-dot">·</span>
+      <span class="strip-item">TVETA Reg. No: TVETA/PRIVATE/TVC/0088/2017</span>
+    </div>
+  </div>
+
+  <!-- 3-CARD FEATURE ROW -->
+  <div class="features-row">
+    <div class="feat-card" onclick="showPage('courses')">
+      <img src="https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg" alt="Culinary Training" onerror="this.src='https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80'">
+      <div class="feat-overlay"></div>
+      <div class="feat-body">
+        <div class="feat-tag">School of Hospitality</div>
+        <div class="feat-title">Culinary Arts & Professional Cookery</div>
+      </div>
+    </div>
+    <div class="feat-card" onclick="showPage('courses')">
+      <img src="https://www.ihe.ac.za/wp-content/uploads/2020/10/full-time-learning.jpg" alt="Hospitality Management" onerror="this.src='https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&q=80'">
+      <div class="feat-overlay"></div>
+      <div class="feat-body">
+        <div class="feat-tag">Department of Tourism</div>
+        <div class="feat-title">Hospitality & Tourism Management</div>
+      </div>
+    </div>
+    <div class="feat-card" onclick="showPage('courses')">
+      <img src="https://iceny.com/wp-content/uploads/2016/02/ICE-LA-Patisserie-Baking-Arts.jpg" alt="Pastry Arts" onerror="this.src='https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&q=80'">
+      <div class="feat-overlay"></div>
+      <div class="feat-body">
+        <div class="feat-tag">Specialist Programme</div>
+        <div class="feat-title">Patisserie & Confectionery Arts</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div class="why-section">
+    <div class="why-inner">
+      <div class="why-header">
+        <div class="section-label">10 Reasons to Choose Us</div>
+        <h2>Why <em style="color:#E8907A">CIH?</em></h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><div class="why-icon">🎓</div><div class="why-title">Expert Tutors</div><div class="why-desc">Experienced faculty readily available for tuition & guidance</div></div>
+        <div class="why-card"><div class="why-icon">📋</div><div class="why-title">Multiple Pathways</div><div class="why-desc">CTH, KNEC, ICM – variety of examining bodies</div></div>
+        <div class="why-card"><div class="why-icon">💰</div><div class="why-title">Affordable Quality</div><div class="why-desc">Top-grade education at accessible prices</div></div>
+        <div class="why-card"><div class="why-icon">🌐</div><div class="why-title">Free Language</div><div class="why-desc">Foreign language included in long-term courses</div></div>
+        <div class="why-card"><div class="why-icon">🏢</div><div class="why-title">Guaranteed Internship</div><div class="why-desc">Industrial attachment for every student</div></div>
+        <div class="why-card"><div class="why-icon">🏆</div><div class="why-title">Excellence Rewards</div><div class="why-desc">Incentives for top-performing students</div></div>
+        <div class="why-card"><div class="why-icon">🏗️</div><div class="why-title">Excellent Facilities</div><div class="why-desc">Modern equipment that stimulates real-world learning</div></div>
+        <div class="why-card"><div class="why-icon">🎭</div><div class="why-title">Co-Curricular</div><div class="why-desc">Sport, culture and talent promotion</div></div>
+        <div class="why-card"><div class="why-icon">📍</div><div class="why-title">Prime Location</div><div class="why-desc">In Thika CBD, away from the noise</div></div>
+        <div class="why-card"><div class="why-icon">🏠</div><div class="why-title">Accommodation</div><div class="why-desc">Affordable housing for out-of-town students</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to Begin<br><em>Your Journey?</em></h2>
+      <p>Applications are open for the next intake. Join thousands of graduates who've transformed their careers.</p>
+      <div class="cta-btns">
+        <button class="btn-white" onclick="showPage('admissions')">Apply for Admission</button>
+        <button class="btn-outline-w" onclick="showPage('courses')">Browse Programmes</button>
+      </div>
+      <div class="cta-contacts">
+        <span class="cta-contact">📞 0703 777 888 / 0791 777 888</span>
+        <span class="cta-contact">📧 admissions@cascade.ac.ke</span>
+        <span class="cta-contact">📍 Cascade Plaza, Karatina Road, Thika</span>
+      </div>
+    </div>
+  </div>
+  <div id="home-footer"></div>
+</div>
+
+<!-- ════ ABOUT PAGE ════ -->
+<div id="page-about" class="page">
+  <div class="page-hero" style="min-height:44vh">
+    <div class="page-hero-img" style="background-image:url('https://www.kenyautalii.ac.ke/wp-content/uploads/2024/02/hospitality-courses-1.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-label">Our Story</div>
+      <h2 style="font-family:'Playfair Display',serif;color:white">Founded on Quality,<br><em>Built for Excellence</em></h2>
+    </div>
+  </div>
+
+  <div class="about-body">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-h2">Kenya's Gateway to Global <em>Hospitality Careers</em></h2>
+        <p class="body-p">Cascade Institute of Hospitality (CIH) is a leading hotel school located in the heart of Thika Town, Kiambu County. Founded on principles of quality, affordability, and unwavering standards, CIH has spent over a decade transforming young Kenyans into world-class hospitality professionals.</p>
+        <p class="body-p">As one of only 12 CTH Gold Centres worldwide, we hold ourselves to international standards in everything we do — from our kitchen facilities to our tourism management classrooms. Our mission is simple: provide quality, holistic education and training that creates economically independent, globally competitive graduates.</p>
+        <div class="feat-list">
+          <div class="feat-item"><div class="feat-chk">✓</div>High quality experienced tutors</div>
+          <div class="feat-item"><div class="feat-chk">✓</div>Guaranteed industrial attachment</div>
+          <div class="feat-item"><div class="feat-chk">✓</div>Free foreign language training</div>
+          <div class="feat-item"><div class="feat-chk">✓</div>Affordable accommodation</div>
+          <div class="feat-item"><div class="feat-chk">✓</div>3 campuses across Kenya</div>
+          <div class="feat-item"><div class="feat-chk">✓</div>TVETA fully accredited</div>
+        </div>
+      </div>
+      <div class="about-photo-wrap">
+        <img class="about-photo" src="https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg" alt="CIH Students" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80'">
+        <div class="about-stat-badge">
+          <div class="about-stat-num">10+</div>
+          <div class="about-stat-lbl">Years of<br>Excellence</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:80px">
+      <div style="background:white;border:1px solid rgba(0,0,0,.07);padding:36px">
+        <div style="font-size:32px;margin-bottom:16px">🎯</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:14px">Our Mission</div>
+        <p class="body-p" style="margin:0">To provide quality, holistic education and training to the youth and to transform them into economically independent and responsible citizens ready for the global hospitality industry.</p>
+      </div>
+      <div style="background:var(--red);padding:36px">
+        <div style="font-size:32px;margin-bottom:16px">🌟</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:14px;color:white">Our Vision</div>
+        <p style="font-size:15px;color:rgba(255,255,255,.82);line-height:1.8;margin:0">To be the premier hospitality training institution in East Africa — producing graduates who lead the industry with competence, creativity, and character.</p>
+      </div>
+    </div>
+
+    <!-- Cascade Kitchen highlight -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:0">
+      <div style="position:relative;overflow:hidden;min-height:340px">
+        <img src="https://rocketpages.co.ke/wp-content/uploads/2024/03/restaurant-plating-food.jpg" alt="Cascade Kitchen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80'">
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.55),rgba(0,0,0,.1))"></div>
+        <div style="position:relative;z-index:1;padding:40px;color:white;height:100%;display:flex;flex-direction:column;justify-content:flex-end">
+          <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px">Sub-brand</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1.2">Cascade Kitchen</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:8px;line-height:1.6">A celebrated restaurant franchise offering authentic dining experiences across Kenya.</div>
+        </div>
+      </div>
+      <div style="background:#1A1A1A;padding:48px;display:flex;flex-direction:column;justify-content:center">
+        <div class="section-label" style="color:#E8907A">Accreditations</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:white;margin-bottom:24px;line-height:1.3">Globally Recognized,<br>Locally Relevant</h3>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,.06)">
+            <div style="width:8px;height:8px;background:#E8907A;border-radius:50%;flex-shrink:0"></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.82)">CTH – Confederation of Tourism & Hospitality (Gold Centre)</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,.06)">
+            <div style="width:8px;height:8px;background:#E8907A;border-radius:50%;flex-shrink:0"></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.82)">KNEC – Kenya National Examinations Council</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,.06)">
+            <div style="width:8px;height:8px;background:#E8907A;border-radius:50%;flex-shrink:0"></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.82)">ICM – Institute of Commercial Management</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,.06)">
+            <div style="width:8px;height:8px;background:#E8907A;border-radius:50%;flex-shrink:0"></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.82)">TVETA – Reg. No: TVETA/PRIVATE/TVC/0088/2017</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-block"><div class="stat-block-v">10+</div><div class="stat-block-l">Years of Excellence</div></div>
+      <div class="stat-block"><div class="stat-block-v">56+</div><div class="stat-block-l">Programmes Offered</div></div>
+      <div class="stat-block"><div class="stat-block-v">3</div><div class="stat-block-l">Campuses in Kenya</div></div>
+      <div class="stat-block"><div class="stat-block-v">12</div><div class="stat-block-l">CTH Gold Centres Worldwide</div></div>
+    </div>
+  </div>
+  <div id="about-footer"></div>
+</div>
+
+<!-- ════ COURSES PAGE ════ -->
+<div id="page-courses" class="page">
+  <div class="page-hero" style="min-height:38vh">
+    <div class="page-hero-img" style="background-image:url('https://chefspencil.com/wp-content/uploads/Best-Culinary-Schools-in-Africa.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-label">Academic Programmes</div>
+      <h2 style="font-family:'Playfair Display',serif;color:white">Our 56+ Courses & <em>Departments</em></h2>
+    </div>
+  </div>
+  <div class="courses-wrap">
+    <div class="courses-intro">
+      <div class="section-label">Choose Your Path</div>
+      <h2>World-Class Programmes<br><em style="font-family:'Playfair Display',serif">Built for Kenya's Best</em></h2>
+      <p>From culinary arts to ICT, every programme is designed for real-world impact with international recognition.</p>
+    </div>
+    <div class="dept-tabs" id="deptTabs"></div>
+    <div class="courses-grid" id="coursesGrid"></div>
+  </div>
+  <div id="courses-footer"></div>
+</div>
+
+<!-- ════ ADMISSIONS PAGE ════ -->
+<div id="page-admissions" class="page">
+  <div class="page-hero" style="min-height:38vh">
+    <div class="page-hero-img" style="background-image:url('https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-label">Join CIH</div>
+      <h2 style="font-family:'Playfair Display',serif;color:white">Admissions & <em>How to Apply</em></h2>
+    </div>
+  </div>
+  <div class="admissions-wrap">
+    <div class="admissions-grid">
+      <div>
+        <div class="section-label">Admission Process</div>
+        <h2 class="section-h2" style="margin-bottom:32px">Simple Steps to<br><em>Join Our Community</em></h2>
+        <div class="steps-list">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div><div class="step-title">Choose Your Programme</div><div class="step-desc">Browse our 56+ programmes across Culinary Arts, Hospitality, Tourism, ICT, and Foreign Languages. Find the one that matches your passion and career goals.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div><div class="step-title">Submit Your Application</div><div class="step-desc">Fill in the enquiry form, email admissions@cascade.ac.ke, or walk into any of our 3 campuses. Bring your national ID and academic certificates.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div><div class="step-title">Receive Admission Letter</div><div class="step-desc">Our admissions team reviews your application within 3 working days and sends a formal offer letter with your reporting date and fee structure.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div><div class="step-title">Pay & Report</div><div class="step-desc">Pay the required fees and report on your intake date. We'll handle everything else — including your free foreign language class and industrial attachment placement.</div></div>
+          </div>
+        </div>
+        <div style="background:rgba(200,75,49,.07);border-left:4px solid var(--red);padding:20px 22px;margin-top:28px">
+          <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:6px">Requirements</div>
+          <div style="font-size:13px;color:#555;line-height:1.7">KCSE Certificate (D+ and above) · National ID / Passport · 2 Passport Photos · Application Fee</div>
+        </div>
+      </div>
+      <div>
+        <div class="form-card">
+          <h3>Start Your Application</h3>
+          <div class="field-row">
+            <div class="field"><label>First Name</label><input type="text" placeholder="Jane"></div>
+            <div class="field"><label>Last Name</label><input type="text" placeholder="Wanjiku"></div>
+          </div>
+          <div class="field"><label>Email Address</label><input type="email" placeholder="jane@email.com"></div>
+          <div class="field"><label>Phone / WhatsApp</label><input type="tel" placeholder="0700 000 000"></div>
+          <div class="field"><label>Programme of Interest</label>
+            <select>
+              <option value="">Select a programme…</option>
+              <option>CTH L3: Diploma in Professional Cookery</option>
+              <option>Diploma in Hospitality Management</option>
+              <option>Diploma in Food & Beverage Management</option>
+              <option>CTH L2: Award in Barista Skills</option>
+              <option>CTH L2: Diploma in Patisserie & Confectionery</option>
+              <option>Certificate in Tour Guiding Operations</option>
+              <option>Diploma in ICT – KNEC</option>
+              <option>French Language Course</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field"><label>Your Message (Optional)</label><textarea rows="3" placeholder="Tell us a bit about yourself or ask any questions…"></textarea></div>
+          <button class="btn-submit">Send Application →</button>
+          <div style="text-align:center;margin-top:14px;font-size:12px;color:#aaa">Or call us directly: <strong style="color:var(--red)">0703 777 888</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="admissions-footer"></div>
+</div>
+
+<!-- ════ EVENTS PAGE ════ -->
+<div id="page-events" class="page">
+  <div class="page-hero" style="min-height:38vh">
+    <div class="page-hero-img" style="background-image:url('https://rocketpages.co.ke/wp-content/uploads/2024/03/restaurant-plating-food.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-label">Cascade Events</div>
+      <h2 style="font-family:'Playfair Display',serif;color:white">Crafting Beautiful,<br><em>Enduring Experiences</em></h2>
+    </div>
+  </div>
+  <div class="events-wrap">
+    <div style="text-align:center;margin-bottom:52px">
+      <div class="section-label">What's Happening</div>
+      <h2 class="section-h2">Upcoming Events & <em>Open Days</em></h2>
+      <p style="font-size:15px;color:#666;max-width:500px;margin:16px auto 0;line-height:1.75">From student open days to Cascade Kitchen dinners and corporate event planning — we do it all.</p>
+    </div>
+    <div class="events-grid">
+      <div class="event-card">
+        <img class="event-card-img" src="https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg" alt="Open Day" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80'">
+        <div class="event-card-body">
+          <div class="event-date">July 12, 2025 · Thika Campus</div>
+          <div class="event-title">Annual Open Day & Campus Tour</div>
+          <div class="event-desc">Meet our faculty, tour our culinary labs, and learn about 2025 intake programmes. Free registration for prospective students.</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <img class="event-card-img" src="https://rocketpages.co.ke/wp-content/uploads/2024/03/restaurant-plating-food.jpg" alt="Gala Dinner" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80'">
+        <div class="event-card-body">
+          <div class="event-date">August 3, 2025 · Cascade Kitchen</div>
+          <div class="event-title">Cascade Culinary Gala Dinner</div>
+          <div class="event-desc">An exclusive evening showcasing the talents of our Level 3 students. A five-course meal crafted and served by tomorrow's top chefs.</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <img class="event-card-img" src="https://iceny.com/wp-content/uploads/2016/02/ICE-LA-Patisserie-Baking-Arts.jpg" alt="Pastry Masterclass" onerror="this.src='https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&q=80'">
+        <div class="event-card-body">
+          <div class="event-date">August 23, 2025 · All Campuses</div>
+          <div class="event-title">Patisserie Masterclass Weekend</div>
+          <div class="event-desc">A hands-on weekend workshop in chocolate artistry, pastry sculpting, and advanced confectionery. Open to enrolled and prospective students.</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#1A1A1A;padding:56px;text-align:center;margin-top:56px">
+      <div class="section-label" style="color:#E8907A;margin-bottom:14px">Cascade Events</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:white;margin-bottom:16px;line-height:1.2">Trust Us With<br><em style="color:#E8907A">Your Special Event</em></h3>
+      <p style="font-size:15px;color:rgba(255,255,255,.65);max-width:480px;margin:0 auto 32px;line-height:1.75">Weddings, corporate dinners, graduations, product launches — our professional events team and Cascade Kitchen handle everything.</p>
+      <button class="btn-white" onclick="showPage('contact')">Book an Event Consultation</button>
+    </div>
+  </div>
+  <div id="events-footer"></div>
+</div>
+
+<!-- ════ CONTACT PAGE ════ -->
+<div id="page-contact" class="page">
+  <div class="page-hero" style="min-height:38vh">
+    <div class="page-hero-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Thika_town.jpg/1280px-Thika_town.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-label">Find Us</div>
+      <h2 style="font-family:'Playfair Display',serif;color:white">Get In Touch<br><em>We'd Love to Hear From You</em></h2>
+    </div>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Contact Information</div>
+        <h2 class="section-h2">We're Here<br><em>For You</em></h2>
+        <p class="body-p">Whether you're a prospective student, a parent, or a corporate partner — our admissions and support team is always happy to help.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div><div class="contact-item-title">Address</div><div class="contact-item-val">Cascade Plaza, Karatina Road<br>Thika Town, Kiambu County, Kenya</div></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div><div class="contact-item-title">Phone</div><div class="contact-item-val">0703 777 888 / 0791 777 888<br>Tel: 020-2002 685</div></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div><div class="contact-item-title">Email</div><div class="contact-item-val">info@cascade.ac.ke<br>admissions@cascade.ac.ke</div></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">⏰</div>
+            <div><div class="contact-item-title">Office Hours</div><div class="contact-item-val">Monday – Friday: 8:00 AM – 5:00 PM<br>Saturday: 9:00 AM – 1:00 PM</div></div>
+          </div>
+        </div>
+        <button class="wa-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.853L.057 23.61a.5.5 0 0 0 .614.614l5.757-1.466A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.942 9.942 0 0 1-5.067-1.384l-.362-.214-3.762.958.976-3.657-.235-.378A9.942 9.942 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Chat on WhatsApp: 0703 777 888
+        </button>
+        <div class="map-placeholder">
+          <div class="map-text">
+            <div class="map-text-icon">📍</div>
+            <div class="map-text-title">Cascade Plaza, Karatina Road</div>
+            <div class="map-text-sub">Thika Town, Kiambu County</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Send Us a Message</h3>
+        <div class="field-row">
+          <div class="field"><label>First Name</label><input type="text" placeholder="Jane"></div>
+          <div class="field"><label>Last Name</label><input type="text" placeholder="Wanjiku"></div>
+        </div>
+        <div class="field"><label>Email</label><input type="email" placeholder="jane@email.com"></div>
+        <div class="field"><label>Phone</label><input type="tel" placeholder="0700 000 000"></div>
+        <div class="field"><label>Subject</label>
+          <select>
+            <option>Admissions Enquiry</option>
+            <option>Course Information</option>
+            <option>Fee Structure</option>
+            <option>Events Booking</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="field"><label>Message</label><textarea rows="5" placeholder="How can we help you?"></textarea></div>
+        <button class="btn-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+  <div id="contact-footer"></div>
+</div>
+
+<script>
+const FOOTER_HTML = `
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><div class="footer-logo-box">CIH</div><span class="footer-logo-text">Cascade Institute of Hospitality</span></div>
+        <p class="footer-desc">Kenya's premier gateway to global hospitality careers. Quality. Affordability. Standards.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Programmes</div>
+        <a class="footer-link" onclick="showPage('courses')">Culinary Arts</a>
+        <a class="footer-link" onclick="showPage('courses')">Hospitality & Tourism</a>
+        <a class="footer-link" onclick="showPage('courses')">Information Technology</a>
+        <a class="footer-link" onclick="showPage('courses')">Foreign Languages</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <a class="footer-link" onclick="showPage('about')">About CIH</a>
+        <a class="footer-link" onclick="showPage('admissions')">Admissions</a>
+        <a class="footer-link" onclick="showPage('events')">Cascade Events</a>
+        <a class="footer-link" onclick="showPage('contact')">Contact Us</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <span class="footer-link">Thika Town, Kiambu County</span>
+        <span class="footer-link">0703 777 888</span>
+        <span class="footer-link">info@cascade.ac.ke</span>
+        <span class="footer-link">Mon–Fri 8am–5pm</span>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© 2025 Cascade Institute of Hospitality. All Rights Reserved.</span>
+      <span>TVETA/PRIVATE/TVC/0088/2017</span>
+    </div>
+  </div>
+</footer>`;
+
+['home','about','courses','admissions','events','contact'].forEach(id=>{
+  const el=document.getElementById(id+'-footer');
+  if(el) el.innerHTML=FOOTER_HTML;
+});
+
+const depts=[
+  {name:"Culinary Arts",icon:"🍳",color:"#C84B31",courses:[
+    {title:"CTH L2: Award in Barista Skills",tag:"CTH Level 2",desc:"Specialist coffee artistry training for the modern café and hospitality industry.",img:"https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg"},
+    {title:"CTH L2: Diploma in Culinary Skills",tag:"CTH Level 2",desc:"Entry-level qualification developing core cooking skills for professional kitchens.",img:"https://www.ihe.ac.za/wp-content/uploads/2020/10/full-time-learning.jpg"},
+    {title:"CTH L2: Diploma in Patisserie & Confectionery",tag:"CTH Level 2",desc:"Specialist pastry training covering chocolate work, dough-kneading, and filling techniques.",img:"https://iceny.com/wp-content/uploads/2016/02/ICE-LA-Patisserie-Baking-Arts.jpg"},
+    {title:"CTH L3: Diploma in Professional Cookery",tag:"CTH Level 3",desc:"Advanced culinary programme preparing students for Chef de Partie roles in top establishments.",img:"https://chefspencil.com/wp-content/uploads/Best-Culinary-Schools-in-Africa.jpg"},
+  ]},
+  {name:"Hospitality & Tourism",icon:"🏨",color:"#1A6B4A",courses:[
+    {title:"CTH L3: Foundation Diploma in Hospitality & Tourism",tag:"CTH Level 3",desc:"A comprehensive foundation covering all aspects of hospitality and tourism management.",img:"https://www.ihe.ac.za/wp-content/uploads/2020/10/full-time-learning.jpg"},
+    {title:"Diploma in Hospitality Management",tag:"KNEC",desc:"Full operational and supervisory hospitality training aligned with KNEC standards.",img:"https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg"},
+    {title:"Diploma in Food & Beverage Management",tag:"KNEC",desc:"Specialist training in restaurant, bar, and events food service management.",img:"https://rocketpages.co.ke/wp-content/uploads/2024/03/restaurant-plating-food.jpg"},
+    {title:"Certificate in Tour Guiding Operations",tag:"CDACC",desc:"Hands-on tourism programme for aspiring tour guides and frontline tourism ambassadors.",img:"https://chefspencil.com/wp-content/uploads/Best-Culinary-Schools-in-Africa.jpg"},
+  ]},
+  {name:"Information Technology",icon:"💻",color:"#1D4E89",courses:[
+    {title:"Diploma in ICT – KNEC",tag:"KNEC",desc:"Strong foundation in ICT for developing business and public-sector applications.",img:"https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg"},
+    {title:"Certificate in Computer Packages",tag:"Internal",desc:"Short-term computer packages running from one week per package — all major software covered.",img:"https://www.ihe.ac.za/wp-content/uploads/2020/10/full-time-learning.jpg"},
+    {title:"Certificate in Web Design & Development",tag:"Internal",desc:"Practical training in HTML, CSS, JavaScript, and modern website development tools.",img:"https://chefspencil.com/wp-content/uploads/Best-Culinary-Schools-in-Africa.jpg"},
+    {title:"Certificate in Information Technology",tag:"ICM",desc:"ICM-accredited IT qualification covering networking, systems, and digital skills.",img:"https://iceny.com/wp-content/uploads/2016/02/ICE-LA-Patisserie-Baking-Arts.jpg"},
+  ]},
+  {name:"Foreign Languages",icon:"🌍",color:"#7B2D8B",courses:[
+    {title:"French Language (Beginner–Advanced)",tag:"Free with long-term courses",desc:"French language training from beginner level through to advanced conversational fluency.",img:"https://rocketpages.co.ke/wp-content/uploads/2024/03/restaurant-plating-food.jpg"},
+    {title:"Mandarin Chinese",tag:"Optional Language",desc:"Introductory and intermediate Mandarin for tourism and hospitality professionals.",img:"https://nie.ac.ke/wp-content/uploads/2024/10/food-and-beverage-courses-kenya.jpg"},
+    {title:"Spanish Language",tag:"Optional Language",desc:"Spanish from beginner level — ideal for tourism careers in Spanish-speaking destinations.",img:"https://chefspencil.com/wp-content/uploads/Best-Culinary-Schools-in-Africa.jpg"},
+    {title:"German Language",tag:"Optional Language",desc:"German language training for hospitality professionals working with international guests.",img:"https://www.ihe.ac.za/wp-content/uploads/2020/10/full-time-learning.jpg"},
+  ]},
+];
+
+let activeDept=0;
+
+function renderCourses(){
+  const tabsEl=document.getElementById('deptTabs');
+  tabsEl.innerHTML=depts.map((d,i)=>`<div class="dept-tab ${i===activeDept?'active':''}" onclick="setDept(${i})">${d.icon} ${d.name}</div>`).join('');
+  const d=depts[activeDept];
+  document.getElementById('coursesGrid').innerHTML=d.courses.map(c=>`
+    <div class="course-card">
+      <img class="course-card-img" src="${c.img}" alt="${c.title}" onerror="this.src='https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80'">
+      <div class="course-card-body">
+        <div class="course-card-tag" style="color:${d.color}">${c.tag}</div>
+        <div class="course-card-title">${c.title}</div>
+        <div class="course-card-desc">${c.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+function setDept(i){activeDept=i;renderCourses();}
+renderCourses();
+
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const navEl=document.getElementById('nav-'+name);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
